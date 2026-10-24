@@ -14,7 +14,7 @@ level="home"
 
 
 while running:
-    screen.fill("teal") 
+    screen.fill("teal")
      
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT:
@@ -34,4 +34,4 @@ while running:
 
     
 
-pygame.QUIT() 
+pygame.QUIT()
