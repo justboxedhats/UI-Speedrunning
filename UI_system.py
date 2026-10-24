@@ -5,10 +5,29 @@ import pygame.font
 screen =pygame.display.set_mode((1,1))
 
 
-def button (x,y,width):
+def button (x,y,width, height):
+    button_rect=pygame.rect.Rect(x,y,width,height)
+    pygame.mouse.get_pos()
+    if button_rect.colide_point() :
+        return True
+    else: 
+        return False
+    pygame.rect.draw(button_rect,(200,200,200))
+
+def text (text,x,y,font):
+    pygame.font.draw()
+
     pass
 
-def text ():
+def image (x,y,directory, width=-1,height=-1):
+    if width == -1:
+        print("skip w scale")
+    else:
+        pygame.trandsform
+    if height ==-1:
+        print("skip H scale")
+    else:
+        pygame.transform()
     pass
 
 
@@ -39,6 +58,9 @@ class pannel :
     def re_color(self,n_color): 
         self.color=n_color
 
+    def text(in_text):
+        print(in_text)
+
     def render(self): 
         pygame.draw.rect(screen,self.color, self.rect)
 
@@ -50,6 +72,12 @@ class pannel_colison (pannel):
     def check_col (self):
         mouse_pos=pygame.mouse.get_pos()
         if self.rect.collidepoint(mouse_pos):
-            return True
+            return True 
         else:
             return False 
+    def check_click (self):
+        mouse_pos=pygame.mouse.get_pos()
+        if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_just_pressed():
+            return True
+        else: 
+            return False
