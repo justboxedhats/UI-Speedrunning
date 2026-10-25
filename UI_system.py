@@ -1,6 +1,7 @@
 import pygame
 import math
-import pygame.font
+pygame.init()
+pygame.font.init()
 
 screen =pygame.display.set_mode((1,1))
 
@@ -36,7 +37,6 @@ def line (_x,_y,x,y):
     point_2=(x,y)
     
 
-    
 
 class pannel :  
     def __init__(self,x,y,width,height,color):
@@ -58,9 +58,6 @@ class pannel :
     def re_color(self,n_color): 
         self.color=n_color
 
-    def text(in_text):
-        print(in_text)
-
     def render(self): 
         pygame.draw.rect(screen,self.color, self.rect)
 
@@ -77,7 +74,23 @@ class pannel_colison (pannel):
             return False 
     def check_click (self):
         mouse_pos=pygame.mouse.get_pos()
-        if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_just_pressed():
+        if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_just_pressed()[0]:
             return True
         else: 
             return False
+
+class text :
+
+    def __init__(self,in_text,x,y,color,font=None):
+        self.in_text =in_text
+        self.x=x
+        self.y=y
+        self.color=color
+        self.font=font 
+        bc_font=pygame.font.SysFont("Areal",30)
+        text_surf=bc_font.render(in_text,True,(self.color))
+        screen.blit(text_surf,(x,y))
+"""
+    def text(in_text,x,y):# this solution may change
+    n_font=
+    print(in_text)"""
