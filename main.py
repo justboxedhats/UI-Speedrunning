@@ -28,6 +28,11 @@ while running:
         if result == "play" :
             level=1 
 
+    elif level == "level_menue":
+        result=level.game_levels.level_menue()
+        if result == "home": 
+            level="home"
+
 
     elif level == 0:
         # calls the levels file 
@@ -37,7 +42,12 @@ while running:
             level="leve"
 
     elif level == 1 : 
-        levels.game_levels.level_1()
+        result=levels.game_levels.level_1()
+
+        if result == "home":
+            level="home"
+        elif result == "level_menu":
+            level=levels
 
     elif level == 2 : 
         levels.game_levels.level_2()

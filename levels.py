@@ -9,6 +9,7 @@ lose=False
 bg_color="white"
 ply_levels=[]
 st_level_time=time.gmtime()
+ed_level_time=0
 
 
 def per2pix(per , whole="s_h"):
@@ -51,7 +52,8 @@ class game_levels:
         # tital_img=Ui_system.pannel.image()
         ver_text=UI_system.text("v_0.1A",per2pix(0),per2pix(2,"s_h"),(100,100,100))
 
-         
+    def level_menu ():
+        menue_text=UI_system.text("level_menu",per2pix(30),per2pix(3,"s_h",(200,130,210)))
 
 
     def settings ():
@@ -65,9 +67,10 @@ class game_levels:
         pannal.render()
 
     def level_1(): 
+        global st_level_time ,ed_level_time
         #bg_color=("limegreen")
         screen.fill(bg_color)
-        global win, lose
+        global win, lose 
         if win != True and lose == False:
             goal_bg=UI_system.pannel(per2pix(20),per2pix(8,"s_h"),per2pix(30),per2pix( 10,"s_h"),(235,90,150))
             goal_bg.render()
@@ -75,17 +78,47 @@ class game_levels:
             finish_button.render()
             finish_text=UI_system.text("win button",per2pix(45),per2pix(40,"s_h"),(200,213,212))
             level_text=UI_system.text("Level 1", per2pix(5),per2pix(8,"s_h"),(100,100,100))
-            timer_text=UI_system.text(f" time",per2pix(80),per2pix(10,"s_h"),(200,41,184))
-            goal_text=UI_system.text("pressed the win button as soon as possable", per2pix(20),per2pix(8,"s_h"),(100,100,100))
+            timer_text=UI_system.text(f" time: {time.gmtime().tm_sec-st_level_time.tm_sec}",per2pix(80),per2pix(10,"s_h"),(200,41,184))
+            goal_text=UI_system.text("press the win button to win", per2pix(20),per2pix(8,"s_h"),(100,100,100))
             if finish_button.check_click():
+                ed_level_time=time.gmtime()
                 win=True
 
 
 
-        elif win == True and lose != False:
-            win=False
-            lose=False
-            return True
+        elif win and lose == False:
+            main_button = UI_system.pannel_colison(per2pix(35),per2pix(25,"s_h"),per2pix(30),per2pix(10,"s_h"),(180,220,220))
+            levels_button= UI_system.pannel_colison(per2pix(35),per2pix(45,"s_h"),per2pix(30),per2pix(10,"s_h"),(180,220,220))
+            next_button= UI_system.pannel_colison(per2pix(35),per2pix(65,"s_h"),per2pix(30),per2pix(10,"s_h"),(180,220,220))
+            retry_button= UI_system.pannel_colison(per2pix(35),per2pix(85,"s_h"),per2pix(30),per2pix(10,"s_h"),(180,220,220))
+
+            main_button.render()
+            levels_button.render()
+            #next_button.render()
+            retry_button.render()
+
+            main_text= UI_system.text("back to main menu",per2pix(35),per2pix(25,"s_h"),(204,100,140))
+            levels_text= UI_system.text("levels",per2pix(35),per2pix(45,"s_h"),(204,100,140))
+            #next_text= UI_system.text("next",per2pix(35),per2pix(65,"s_h"),(204,100,140))
+            retry_text = UI_system.text("retry",per2pix(35),per2pix(85,"s_h"),(204,100,140)) 
+            win_text = UI_system.text("FINISH! ",per2pix(35),per2pix(3,"s_h"),(204,100,140)) 
+            fin_time_text= UI_system.text(f" time: {ed_level_time.tm_sec-st_level_time.tm_sec} ",per2pix(35),per2pix(7,"s_h"),(204,100,140))
+
+            if retry_button.check_click():
+                #resets the timer and level flags 
+                win=False
+                st_level_time=time.gmtime()
+                ed_level_time=time.gmtime()
+            if main_button.check_click():
+                win=False
+                st_level_time=time.gmtime()
+                ed_level_time=time.gmtime()
+                return  "home"
+            if levels_button.check_click():
+                return "level_menu"
+            #if next_button.check_click():
+
+            
             
             #load winning screen
         elif win == False and lose == True:
