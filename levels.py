@@ -53,14 +53,19 @@ class game_levels:
         ver_text=UI_system.text("v_0.1A",per2pix(0),per2pix(2,"s_h"),(100,100,100))
 
     def level_menu ():
-        menue_text=UI_system.text("level_menu",per2pix(30),per2pix(3,"s_h",(200,130,210)))
-
+        screen.fill(bg_color)
+        menue_text=UI_system.text("level_menu",per2pix(30),per2pix(3,"s_h"),(200,130,210))
+        lev_1=UI_system.pannel_colison(per2pix(8),per2pix( 20,"s_h"),per2pix(4),per2pix(4,"s_h"),(34,134,90))
+        lev_1.render()
+        text_1=UI_system.text("1",per2pix(8),per2pix(20,"s_h"),(23,34,23))
+        if lev_1.check_click():
+            return"level_1"
 
     def settings ():
         # music volume, mute, show timer
         settings_text=UI_system.text("v_0.1A",300,250,(100,100,100))
-        settings_bg=UI_system.pannel(per2pix(35),)
-        pass 
+        settings_bg=UI_system.pannel(per2pix(35),) 
+
 
     def level_0 () :
         pannal=UI_system.pannel(20,30,50,40,(100,100,100))
@@ -115,6 +120,9 @@ class game_levels:
                 ed_level_time=time.gmtime()
                 return  "home"
             if levels_button.check_click():
+                win=False
+                st_level_time=time.gmtime()
+                ed_level_time=time.gmtime()
                 return "level_menu"
             #if next_button.check_click():
 

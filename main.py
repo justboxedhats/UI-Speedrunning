@@ -28,10 +28,12 @@ while running:
         if result == "play" :
             level=1 
 
-    elif level == "level_menue":
-        result=level.game_levels.level_menue()
+    elif level == "level_menu":
+        result=levels.game_levels.level_menu()
         if result == "home": 
             level="home"
+        if result == "level_1":
+            level=1
 
 
     elif level == 0:
@@ -47,7 +49,9 @@ while running:
         if result == "home":
             level="home"
         elif result == "level_menu":
-            level=levels
+            level="level_menu" 
+        #elif result == "":
+        #    level
 
     elif level == 2 : 
         levels.game_levels.level_2()
