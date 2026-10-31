@@ -94,3 +94,73 @@ class text :
     def text(in_text,x,y):# this solution may change
     n_font=
     print(in_text)"""
+
+
+
+
+class drop_down ():
+    drop_down= False
+    item_list=["win", "lose"]
+    
+
+    def __init__(self):
+        super.__init__(self)
+
+    def check_click ():
+        if drop_down :
+            for i in pos_list :
+                item
+
+        else:
+            if self.rect.collidepoknt(pygame.mouse.get_pos()) and pygame.mouse.get_pressed[0]:
+                drop_down=True
+
+    def check_colide (self) or :
+        mouse_pos=pygame.mouse.get_pos()
+        for i in self.item_list: 
+            return 
+        
+        if self.rect.collidepoint(mouse_pos) and pygame.mouse.getpressed()[0]:
+            self.y=mouse_pos[1]
+
+
+class switch :
+    def __init__(self,x,y,width,height,color, long):
+        super(pannel).__init__(x,y,width,height,color)
+
+        self.rect=pygame.rect.Rect(x,y,width, height) 
+        self.long=long
+        
+
+        def render_long (self): 
+            long_rect=pygame.rect.Rect(self.x,self.y,self.width, ) 
+            pygame.rect.Rect
+
+        def check_col (self):
+            mouse_pos=pygame.mouse.get_pos()
+            if self.rect.collidepoint(mouse_pos):
+                return True 
+            else:
+                return False
+            
+        def check_click (self):
+            mouse_pos=pygame.mouse.get_pos()
+            if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_just_pressed()[0]:
+                return True
+            else: 
+                return False
+
+
+class dragable ():
+    def __init__ (self,x,y,width,heigt):
+        super(pannel).__init__(self,x,y,width,heigt)
+        self.rect=pygame.rect.Rect(x,y,width,height)
+
+    def check_drag (self):
+        print()
+        mouse_pos=pygame.mouse.get_pos()
+        if self.rect.Rect.collide_point
+
+
+# lever
+# charecter 

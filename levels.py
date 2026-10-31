@@ -60,7 +60,7 @@ class game_levels:
         text_1=UI_system.text("1",per2pix(8),per2pix(20,"s_h"),(23,34,23))
         if lev_1.check_click():
             return"level_1"
-
+        
     def settings ():
         # music volume, mute, show timer
         settings_text=UI_system.text("v_0.1A",300,250,(100,100,100))
@@ -132,10 +132,43 @@ class game_levels:
         elif win == False and lose == True:
             win=False
             lose=False
-            return True
-            pass
+            return "lose"
             # loads failior screen 
     
     def level_2 ():
+        screen.fill(bg_color)
+        pos_list=[(per2pix(50),per2pix(50,"s_h")),(per2pix(20),per2pix(10,"s_h"))]
+        pos_tracker=0
+
+        if win == False and lose ==False:
+
+            win_button=UI_system.pannel_colison()
+
+           
+            intruct_text=UI_system.text 
+            level_text=UI_system.text
+            time_text=UI_system.text
+
+            if win_button.check_click() and win_button.x != pos_list[-1] and win_button.y != pos_list[-1]:
+                print
+        elif win and lose == False :
+            print("won")
+
+             
+
         pannal=UI_system.pannel(200,30,120,40,(200,140,210))
         pannal.render()
+
+    def level_3 ():
+        screen.fill(bg_color)
+        
+
+        if win != True and lose != True:
+            # loads the playable 
+            
+            pass
+        elif win and lose != True :
+            pass 
+        elif win != True and lose:
+            pass 
+
