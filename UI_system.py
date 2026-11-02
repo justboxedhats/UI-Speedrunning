@@ -81,13 +81,14 @@ class pannel_colison (pannel):
 
 class text :
 
-    def __init__(self,in_text,x,y,color,font=None):
+    def __init__(self,in_text,x,y,color=(180,180,180),font="arial",size=30):
         self.in_text =in_text
         self.x=x
         self.y=y
         self.color=color
         self.font=font 
-        bc_font=pygame.font.SysFont("Areal",30)
+        self.size=size
+        bc_font=pygame.font.SysFont("arial",size)
         text_surf=bc_font.render(in_text,True,(self.color))
         screen.blit(text_surf,(x,y))
 """
@@ -98,24 +99,30 @@ class text :
 
 
 
-class drop_down ():
+class drop_down :
     drop_down= False
     item_list=["win", "lose"]
-    
 
-    def __init__(self):
+
+    def __init__(self,x,y,width,height,item_list,color):
         super.__init__(self)
+        self.rect=pygame.revt.Rect(x,y,width,height)
+        self.item_list=item_list
 
-    def check_click ():
+    def check_click (self):
+        if self.rect.collidepoint(pygame.mouse.get_pos()):
+            drop_down= not drop_down
         if drop_down :
-            for i in pos_list :
-                item
+            for i in self.item_list :
+                self.rect.y-=i*self.height()
+                pygame.draw.rect(self.rect,color)
+                text(f"{self.item_list[i]}",x,y)
+                if self.rect.collidepoint(pygame.mouse.get_pos()):
+                    return self.item_list[i]
+                self.rect.y+=self.height()*i
 
-        else:
-            if self.rect.collidepoknt(pygame.mouse.get_pos()) and pygame.mouse.get_pressed[0]:
-                drop_down=True
 
-    def check_colide (self) or :
+    def check_colide (self):
         mouse_pos=pygame.mouse.get_pos()
         for i in self.item_list: 
             return 
@@ -124,17 +131,26 @@ class drop_down ():
             self.y=mouse_pos[1]
 
 
+
+
+
+
+
 class switch :
+    
     def __init__(self,x,y,width,height,color, long):
         super(pannel).__init__(x,y,width,height,color)
 
         self.rect=pygame.rect.Rect(x,y,width, height) 
         self.long=long
+        self.mode=False
         
 
         def render_long (self): 
-            long_rect=pygame.rect.Rect(self.x,self.y,self.width, ) 
-            pygame.rect.Rect
+            self.render()
+            color=(self.color[0]/2,self.color[1]/2,self.color[2]/2)
+            long_rect=pygame.rect.Rect(self.x,self.y,self.width,self.height + long) 
+            pygame.draw.rect(long_rect,color)
 
         def check_col (self):
             mouse_pos=pygame.mouse.get_pos()
@@ -146,20 +162,47 @@ class switch :
         def check_click (self):
             mouse_pos=pygame.mouse.get_pos()
             if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_just_pressed()[0]:
-                return True
-            else: 
-                return False
-
+                self.rect.y=pygame.mouse.getpos()[1]
+            if self.rect.y > self.y-(self.height/2):
+                self.mode=True
+            elif self.rect.y <  self.long+ self.height:
+                self.mode=False
+            return self.mode
 
 class dragable ():
-    def __init__ (self,x,y,width,heigt):
-        super(pannel).__init__(self,x,y,width,heigt)
+    def __init__ (self,x,y,width,height):
+        super(pannel).__init__(self,x,y,width,height)
         self.rect=pygame.rect.Rect(x,y,width,height)
 
     def check_drag (self):
-        print()
         mouse_pos=pygame.mouse.get_pos()
-        if self.rect.Rect.collide_point
+        if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_just_pressed[0]:
+            self.rect.x=mouse_pos[0]+(self.width/2)
+            self.rect.y=mouse_pos[1]+(self.height/2)
+
+class lose_sqt : 
+    def __init__(self):
+        super(pannel).__init__()
+
+    def check_mouse (self):
+        global win,lose 
+        mouse_pos=pygame.mouse.get_pos()
+        if self.rect.collidepoint(mouse_pos) :
+            win=False
+            lose=True
+
+
+    def check_mouse_c (self):
+        global win,lose 
+        mouse_pos=pygame.mouse.get_pos()
+        if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_just_pressed()[0]:
+            win=False
+            lose=True
+
+
+    #def check_ob (self): # check obkejects  
+
+        
 
 
 # lever
