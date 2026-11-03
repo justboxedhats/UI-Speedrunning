@@ -267,6 +267,7 @@ class game_levels:
                 # loads the playable 
 
                 dropdown=UI_system.drop_down(per2pix(40),per2pix(30),per2pix(10),per2pix(4,"s_h"),)
+                win_button=UI_system.pannel_colison(per2pix(45),per2pix(45,"s_h"),30,30,(200,255,200))
 
                 # sets buttons 
 
@@ -276,8 +277,8 @@ class game_levels:
                 # renders text
 
                 # check buttons 
+
                 
-                pass
             elif win and lose != True :
                 # win menue
 
@@ -313,16 +314,25 @@ class game_levels:
         if pause : 
             if win != True and lose != True:
                 # loads the playable 
+                
+                lose_squ=UI_system.lose_squ
+                win_button=UI_system.pannel_colison(per2pix(45),per2pix(45,"s_h"),30,30,(200,255,200))
+
 
                 # sets buttons 
+
 
                 #renders buttons
 
                 # renders text
 
                 # check buttons 
+
+                if lose_squ.check_mouse():
+                    lose == True
+                if win_button.check_click():
+                    win== True
                 
-                pass
             elif win and lose != True :
                 # win menue
 

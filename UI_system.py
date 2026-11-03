@@ -177,16 +177,16 @@ class dragable ():
             self.rect.x=mouse_pos[0]+(self.width/2)
             self.rect.y=mouse_pos[1]+(self.height/2)
 
-class lose_sqt : 
-    def __init__(self):
-        super(pannel).__init__()
+class lose_squ : 
+    def __init__(self,x,y,width,height,color):
+        super().__init__(x,y,width,height,color)
+        self.rect=pygame.rect.Rect(x,y,width,height)
 
     def check_mouse (self):
         global win,lose 
         mouse_pos=pygame.mouse.get_pos()
         if self.rect.collidepoint(mouse_pos) :
-            win=False
-            lose=True
+            return True
 
 
     def check_mouse_c (self):
