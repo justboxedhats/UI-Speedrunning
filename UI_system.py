@@ -64,7 +64,6 @@ class pannel :
 class pannel_colison (pannel): 
     def __init__(self,x,y,width,height,color):
         super().__init__(x,y,width,height,color)
-        self.rect=pygame.rect.Rect(x,y,width,height)
 
     def check_col (self):
         mouse_pos=pygame.mouse.get_pos()
@@ -129,8 +128,6 @@ class drop_down :
         
         if self.rect.collidepoint(mouse_pos) and pygame.mouse.getpressed()[0]:
             self.y=mouse_pos[1]
-
-
 
 
 

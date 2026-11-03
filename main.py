@@ -32,8 +32,8 @@ while running:
         result=levels.game_levels.level_menu()
         if result == "home": 
             level="home"
-        if result == "level_1":
-            level=1
+        if result != None:
+            level=result
 
 
     elif level == 0:
