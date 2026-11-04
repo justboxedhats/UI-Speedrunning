@@ -4,6 +4,8 @@ pygame.init()
 pygame.font.init()
 
 screen =pygame.display.set_mode((1,1))
+drop_down= False# for item list
+switchmode=False
 
 
 def button (x,y,width, height):
@@ -15,10 +17,12 @@ def button (x,y,width, height):
         return False
     pygame.rect.draw(button_rect,(200,200,200))
 
-def text (text,x,y,font):
-    pygame.font.draw()
+def text (in_text,x,y,color=(180,180,180),font="arial",size=30):
+    bc_font=pygame.font.SysFont(font,size)
+    text_surf=bc_font.render(in_text,True,(color))
+    screen.blit(text_surf,(x,y))
 
-    pass
+
 
 def image (x,y,directory, width=-1,height=-1):
     if width == -1:
@@ -87,7 +91,7 @@ class text :
         self.color=color
         self.font=font 
         self.size=size
-        bc_font=pygame.font.SysFont("arial",size)
+        bc_font=pygame.font.SysFont(font,size)
         text_surf=bc_font.render(in_text,True,(self.color))
         screen.blit(text_surf,(x,y))
 """
@@ -98,20 +102,44 @@ class text :
 
 
 
-class drop_down :
-    drop_down= False
-    item_list=["win", "lose"]
+class ui_drop_down (pannel) :
 
-
-    def __init__(self,x,y,width,height,item_list,color):
-        super.__init__(self)
-        self.rect=pygame.revt.Rect(x,y,width,height)
-        self.item_list=item_list
+    def __init__(self,x,y,width,height,color,list):
+        super().__init__(x,y,width,height,color)
+        self.rect=pygame.rect.Rect(x,y,width,height)
+        self.color=color
+        self.item_list=list
 
     def check_click (self):
-        if self.rect.collidepoint(pygame.mouse.get_pos()):
-            drop_down= not drop_down
+        global drop_down
+        pygame.draw.rect(screen,self.color,self.rect)
+        if self.rect.collidepoint(pygame.mouse.get_pos()) and pygame.mouse.get_just_pressed()[0]:
+            drop_down= not drop_down 
+            print("checked collistion ")
         if drop_down :
+            for i in range(len(self.item_list)) : # use range for int vaules
+                self.rect.y+=(i+1)*(self.rect.height +2)
+                pygame.draw.rect(screen,self.color,self.rect)
+                text(f"{self.item_list[i]}",self.rect.x,self.rect.y,(150,150,150),"arial",20)
+                if self.rect.collidepoint(pygame.mouse.get_pos()) and pygame.mouse.get_just_pressed()[0]:
+                    return self.item_list[i]
+                self.rect.y-=(i+1)*(self.rect.height +2)
+
+
+    def check_colide (self):# broken
+        mouse_pos=pygame.mouse.get_pos()
+        for i in self.item_list: 
+            return 
+        
+        if self.rect.collidepoint(mouse_pos) and pygame.mouse.getpressed()[0]:
+            self.y=mouse_pos[1]
+
+"""
+    def render ():
+        pygame.draw.rect(screen,(self.color),self.rect)
+        if drop_down :
+
+
             for i in self.item_list :
                 self.rect.y-=i*self.height()
                 pygame.draw.rect(self.rect,color)
@@ -120,55 +148,51 @@ class drop_down :
                     return self.item_list[i]
                 self.rect.y+=self.height()*i
 
-
-    def check_colide (self):
-        mouse_pos=pygame.mouse.get_pos()
-        for i in self.item_list: 
-            return 
-        
-        if self.rect.collidepoint(mouse_pos) and pygame.mouse.getpressed()[0]:
-            self.y=mouse_pos[1]
+        else:
+            
+"""
 
 
-
-
-
-class switch :
+class switch (pannel) :
     
     def __init__(self,x,y,width,height,color, long):
-        super(pannel).__init__(x,y,width,height,color)
-
+        super().__init__(x,y,width,height,color)
         self.rect=pygame.rect.Rect(x,y,width, height) 
         self.long=long
-        self.mode=False
         
 
-        def render_long (self): 
-            self.render()
-            color=(self.color[0]/2,self.color[1]/2,self.color[2]/2)
-            long_rect=pygame.rect.Rect(self.x,self.y,self.width,self.height + long) 
-            pygame.draw.rect(long_rect,color)
+    def render_long (self): 
+        color=(int(self.color[0]/2),int(self.color[1]/2),int(self.color[2]/2))
+        long_rect=pygame.rect.Rect(self.x,self.y,self.width,self.y+self.height+self.long) 
+        pygame.draw.rect(screen,color,long_rect)
+        self.render()
 
-        def check_col (self):
-            mouse_pos=pygame.mouse.get_pos()
-            if self.rect.collidepoint(mouse_pos):
-                return True 
-            else:
-                return False
-            
-        def check_click (self):
-            mouse_pos=pygame.mouse.get_pos()
-            if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_just_pressed()[0]:
-                self.rect.y=pygame.mouse.getpos()[1]
-            if self.rect.y > self.y-(self.height/2):
-                self.mode=True
-            elif self.rect.y <  self.long+ self.height:
-                self.mode=False
-            return self.mode
+    def check_col (self):
+        mouse_pos=pygame.mouse.get_pos()
+        if self.rect.collidepoint(mouse_pos):
+            return True 
+        else:
+            return False
+        
+    def check_click (self):
+        mouse_pos=pygame.mouse.get_pos()
+        global switchmode
+        if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
+            print("clicked switch")
+            self.rect.y=pygame.mouse.get_pos()[1]
+            if self.rect.y < self.y:
+                self.rect.y=self.y
+            elif self.rect.y > self.y+self.height+self.long:
+                self.rect.y = self.y+self.height+self.long
+        if self.rect.y < self.y+self.height:
+            switchmode=True # invert these 
+        elif self.rect.y >  self.long-self.height:
+            switchmode=False
+        return switchmode
 
-class dragable ():
+class dragable (pannel):
     def __init__ (self,x,y,width,height):
-        super(pannel).__init__(self,x,y,width,height)
+        super().__init__(self,x,y,width,height)
         self.rect=pygame.rect.Rect(x,y,width,height)
 
     def check_drag (self):
@@ -177,7 +201,7 @@ class dragable ():
             self.rect.x=mouse_pos[0]+(self.width/2)
             self.rect.y=mouse_pos[1]+(self.height/2)
 
-class lose_squ : 
+class lose_squ (pannel): 
     def __init__(self,x,y,width,height,color):
         super().__init__(x,y,width,height,color)
         self.rect=pygame.rect.Rect(x,y,width,height)

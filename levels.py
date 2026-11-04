@@ -13,7 +13,8 @@ ed_level_time=0
 pos_tracker=0
 total_levels=6
 pause=False
-
+list_vaule=""# for dropdown list
+list_vaule= ""
 
 def per2pix(per , whole="s_h"):
     if whole =="s_h":
@@ -97,6 +98,7 @@ class game_levels:
             win=False
             st_level_time=time.gmtime()
             ed_level_time=time.gmtime()
+            return "retry"
         if main_button.check_click():
             win=False
             st_level_time=time.gmtime()
@@ -139,6 +141,7 @@ class game_levels:
             lose = False
             st_level_time=time.gmtime()
             ed_level_time=time.gmtime()
+            return "retry"
         elif main_button.check_click():
             win=False
             lose = False
@@ -260,23 +263,34 @@ class game_levels:
 
     def level_3 ():
         screen.fill(bg_color)
+        global st_level_time ,ed_level_time ,win ,lose ,pause ,pos_tracker,list_vaule,dropdown
         item_list=["click","the","win", "button"]
         # set varables (constant)
-        if pause : 
+        if not pause : 
             if win != True and lose != True:
                 # loads the playable 
-
-                dropdown=UI_system.drop_down(per2pix(40),per2pix(30),per2pix(10),per2pix(4,"s_h"),)
+                
+                dropdown=UI_system.ui_drop_down(per2pix(35),per2pix(35,"s_h"),per2pix(10),per2pix(4,"s_h"),(200,200,250),item_list)
                 win_button=UI_system.pannel_colison(per2pix(45),per2pix(45,"s_h"),30,30,(200,255,200))
 
                 # sets buttons 
 
                 #renders buttons
                 
-
+                list_result=dropdown.check_click()
                 # renders text
-
+                intruct_text=UI_system.text("use the drop down menu",per2pix(30),per2pix(5,"s_h"))
+                level_text=UI_system.text("level 3",per2pix(1),per2pix(2,"s_h"))
+                time_text=UI_system.text(f"time: {ed_level_time.tm_sec-st_level_time.tm_sec}",per2pix(98),per2pix(5,"s_h"))
                 # check buttons 
+                if list_result =="win":
+                    list_vaule="win"
+                if list_vaule== "win":
+                    win_button.render()
+                    if win_button.check_click():
+                        ed_level_time=time.gmtime()
+                        win=True
+
 
                 
             elif win and lose != True :
@@ -284,38 +298,33 @@ class game_levels:
 
                 #continue to load visuals 
 
+                win=False
+                lose=False
+                return "win"    
                 # load win animation
 
                 # return win 
-
-                pass
-            elif win != True and lose:
-                #lose menu
-
-                # render visuals 
-
-                # load lose animation
-
-                # return to lose screen
-                pass 
         else:
             if time == 0:
                 #load start menu
                 win_avalable=False
+                pause_text=UI_system.text("start_ pause menu",per2pix(43),per2pix(10,"s_h"))
                 pass
             else:
                 # load pause menu 
+                pause_text=UI_system.text("pause menu",per2pix(43),per2pix(10,"s_h"))
                 pass
 
 
     def level_4 ():
         screen.fill(bg_color)
+        global st_level_time ,ed_level_time ,win ,lose ,pause ,pos_tracker
         # set varables (constant)
-        if pause : 
+        if not pause : 
             if win != True and lose != True:
                 # loads the playable 
                 
-                lose_squ=UI_system.lose_squ
+                lose_squ=UI_system.lose_squ(per2pix(35),per2pix(45,"s_h"),per2pix(10),per2pix(30,"s_h"),(255,0,0))
                 win_button=UI_system.pannel_colison(per2pix(45),per2pix(45,"s_h"),30,30,(200,255,200))
 
 
@@ -323,21 +332,29 @@ class game_levels:
 
 
                 #renders buttons
+                lose_squ.render()
+                win_button.render()
 
                 # renders text
-
+                intruct_text=UI_system.text("click the win button",per2pix(30),per2pix(5,"s_h"))
+                level_text=UI_system.text("level 4",per2pix(1),per2pix(2,"s_h"))
+                time_text=UI_system.text(f"time: {ed_level_time.tm_sec-st_level_time.tm_sec}",per2pix(98),per2pix(5,"s_h"))
                 # check buttons 
-
+                print(f"win: {win} , loose:  {lose} ")
                 if lose_squ.check_mouse():
-                    lose == True
+                    print("click lose")
+                    lose = True
                 if win_button.check_click():
-                    win== True
+                    print("click win")
+                    win= True
                 
             elif win and lose != True :
                 # win menue
 
                 #continue to load visuals 
-
+                win=False
+                lose=False
+                return "win" 
                 # load win animation
 
                 # return win 
@@ -347,7 +364,9 @@ class game_levels:
                 #lose menu
 
                 # render visuals 
-
+                win=False
+                lose=False
+                return "lose" 
                 # load lose animation
 
                 # return to lose screen
@@ -360,10 +379,69 @@ class game_levels:
                 # load pause menu 
                 pass
 
+    def  level_5():
+        screen.fill(bg_color)
+        global st_level_time ,ed_level_time ,win ,lose ,pause ,pos_tracker
+        # set varables (constant)
+        if not pause : 
+            if win != True and lose != True:
+                # loads the playable 
+
+                # sets buttons 
+
+                # the switch should be set before the gameloop starts 
+                switch=UI_system.switch(per2pix(70),per2pix(25,"s_h"),per2pix(10),per2pix(5,"s_h"),(200,200,200),100)
+                win_button=UI_system.pannel_colison(per2pix(25),per2pix(45,"s_h"),30,30,(200,255,200))
+                #renders buttons
+                switch.render_long()
+
+                # renders text
+                intruct_text=UI_system.text("pull the switch down",per2pix(30),per2pix(5,"s_h"))
+                level_text=UI_system.text("level 5",per2pix(1),per2pix(2,"s_h"))
+                time_text=UI_system.text(f"time: {ed_level_time.tm_sec-st_level_time.tm_sec}",per2pix(98),per2pix(5,"s_h"))
+                # check buttons 
+                if switch.check_click():
+                    win_button.render()
+                    if win_button.check_click():
+                        win=True
+
+
+            elif win and lose != True :
+                # win menue
+
+                #continue to load visuals 
+
+                # load win animation
+                win=False
+                lose=False
+                return "win"
+                # return win 
+
+
+            elif win != True and lose:
+                #lose menu
+
+                # render visuals 
+
+                # load lose animation
+
+                # return to lose screen
+
+                pass 
+        else:
+            if time == 0:
+                #load start menu
+                pass
+            else:
+                # load pause menu 
+                pass
+
+
     def level_temp ():
         screen.fill(bg_color)
+        global st_level_time ,ed_level_time ,win ,lose ,pause ,pos_tracker
         # set varables (constant)
-        if pause : 
+        if not pause : 
             if win != True and lose != True:
                 # loads the playable 
 
@@ -372,7 +450,9 @@ class game_levels:
                 #renders buttons
 
                 # renders text
-
+                intruct_text=UI_system.text("win",per2pix(30),per2pix(5,"s_h"))
+                level_text=UI_system.text("level #",per2pix(1),per2pix(2,"s_h"))
+                time_text=UI_system.text(f"time: {ed_level_time.tm_sec-st_level_time.tm_sec}",per2pix(98),per2pix(5,"s_h"))
                 # check buttons 
                 
                 pass
@@ -398,7 +478,9 @@ class game_levels:
         else:
             if time == 0:
                 #load start menu
+                pause_text=UI_system.text("start_ pause menu",per2pix(43),per2pix(10,"s_h"))
                 pass
             else:
                 # load pause menu 
+                pause_text=UI_system.text("pause menu",per2pix(43),per2pix(10,"s_h"))
                 pass
