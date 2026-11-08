@@ -190,6 +190,22 @@ class switch (pannel) :
             switchmode=False
         return switchmode
 
+class bar (pannel):
+
+    def __init__(self,x,y,width,height,color, long):
+        super().__init__(x,y,width,height,color)
+        self.rect=pygame.rect.Rect(x,y,width, height) 
+        self.long=long
+
+    def draw_long():
+        pass
+    def check_click():
+        pass
+    def check_col():
+        pass
+
+
+
 class dragable (pannel):
     def __init__ (self,x,y,width,height):
         super().__init__(self,x,y,width,height)
@@ -200,6 +216,7 @@ class dragable (pannel):
         if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_just_pressed[0]:
             self.rect.x=mouse_pos[0]+(self.width/2)
             self.rect.y=mouse_pos[1]+(self.height/2)
+
 
 class lose_squ (pannel): 
     def __init__(self,x,y,width,height,color):

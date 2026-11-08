@@ -10,11 +10,28 @@ bg_color="white"
 ply_levels=[]
 st_level_time=time.gmtime()
 ed_level_time=0
+anti_time=0
 pos_tracker=0
 total_levels=6
 pause=False
 list_vaule=""# for dropdown list
 list_vaule= ""
+
+# input loop 
+
+for input in pygame.event.get():
+    if input == "K_ESCAPE":
+        pause=True
+    if input == "K_up":
+        pass
+    if input == "K_down":
+        pass
+    if input == "k_left":
+        pass
+    if input == "K_right":
+        pass 
+    if input == "K_SPACE":
+        pass
 
 def per2pix(per , whole="s_h"):
     if whole =="s_h":
@@ -83,7 +100,7 @@ class game_levels:
 
         main_button.render()
         levels_button.render()
-        next_button.render()
+        next_button.render() 
         retry_button.render()
 
         main_text= UI_system.text("Main Menu",per2pix(35),per2pix(25,"s_h"),(204,100,140))
@@ -157,7 +174,14 @@ class game_levels:
         else:
             return"lose"
 
-        
+    def game_pause():#may be unused
+        bg_color=(180,180,180)
+
+        #define buttons 
+        # render buttons 
+        #render
+        # check buttons  
+        #        
         
     def settings ():
         # music volume, mute, show timer
@@ -204,22 +228,24 @@ class game_levels:
         global st_level_time ,ed_level_time ,win ,lose ,pause ,pos_tracker
         screen.fill(bg_color)
         pos_list=[(per2pix(50),per2pix(50,"s_h")),(per2pix(20),per2pix(10,"s_h")),(per2pix(80),per2pix(80,"s_h")),(per2pix(50),per2pix(0,"s_h"))]
-        if not pause : 
-            if win == False and lose == False:
-                # loads the playable 
 
-                # sets buttons 
+        if win == False and lose == False:
+            # loads the playable 
+
+            # sets buttons 
 #                UI_system.pannel_colison.re_pos
-                try: # this could be better :(
-                    win_button=UI_system.pannel_colison(pos_list[pos_tracker][0],pos_list[pos_tracker][1],30,30,(200,255,200))
+            try: # this could be better :(
+                win_button=UI_system.pannel_colison(pos_list[pos_tracker][0],pos_list[pos_tracker][1],30,30,(200,255,200))
 
-                except:
-                    win_button=UI_system.pannel_colison(per2pix(45),per2pix(45,"s_h"),30,30,(200,255,200))
-                    print("define no")
+            except:
+                win_button=UI_system.pannel_colison(per2pix(45),per2pix(45,"s_h"),30,30,(200,255,200))
+                print("define no")
 
-                # render buttons
+            # render buttons
 
-                win_button.render()
+            win_button.render()
+
+            if not pause : 
 
                 # renders text
                 intruct_text=UI_system.text("click the real win button",per2pix(30),per2pix(5,"s_h"))
@@ -238,8 +264,35 @@ class game_levels:
                     
                     ed_level_time=time.gmtime()
                     win=True
+            else:
+                if time == 0:
+                    #load start menu
+                    pause_bg=pygame.rect.Rect(0,0,screen.width(),screen.height())
+                    pygame.draw.rect(screen,(100,100,100,100),pause_bg)
+                    # load buttons 
+                    start_button=UI_system.pannel_colison()
+                    main_button=UI_system.pannel_colison(per2pix(10))
+                else:
+                    # load pause menu 
+                    pause_bg=pygame.rect.Rect(0,0,screen.width(),screen.hueght())
+                    #load buttons
+                    cont_button=UI_system.pannel_colison(per2pix(40),per2pix(40,"s_h"),per2pix(10),per2pix(5,"s_h"),(180,210,180))
+                    retry_button=UI_system.pannel_colison(per2pix(40),per2pix(50,"s_h"),per2pix(10),per2pix(5,"s_h"),(180,210,180))
+                    main_button=UI_system.pannel_colison(per2pix(40),per2pix(60,"s_h"),per2pix(10),per2pix(5,"s_h"),(180,210,180))
+
+                    #render buttons 
+                    cont_button.render()
+                    retry_button.render()
+                    main_button.render()
+
+                    #load text
+                    UI_system.text("Pause",per2pix(40),per2pix(10,"s_h"),(0,0,0),None,30)
+                    UI_system.text("continue",per2pix(40),per2pix(40,"s_h"),(20,30,100),None,15)
+                    UI_system.text("retry",per2pix(40),per2pix(50,"s_h"),(20,30,100),None,15)
+                    UI_system.text("main menu",per2pix(40),per2pix(60,"s_h"),(20,30,100),None,15)
+
                 
-            elif win and lose != True :
+        elif win and lose != True :
                 # win menue
 
                 #continue to load visuals 
@@ -252,13 +305,7 @@ class game_levels:
 
                 # return win 
 
-        else:
-            if time == 0:
-                #load start menu
-                pass
-            else:
-                # load pause menu 
-                pass
+
 
 
     def level_3 ():
@@ -372,7 +419,7 @@ class game_levels:
                 # return to lose screen
                 pass 
         else:
-            if time == 0:
+            if time == 0: # needs to fix timer system
                 #load start menu
                 pass
             else:
@@ -484,3 +531,11 @@ class game_levels:
                 # load pause menu 
                 pause_text=UI_system.text("pause menu",per2pix(43),per2pix(10,"s_h"))
                 pass
+
+# up dates level timer
+ 
+if pause == True:
+    pass
+    # anti_time+=#pygame frame
+
+
