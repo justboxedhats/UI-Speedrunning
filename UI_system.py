@@ -197,13 +197,58 @@ class bar (pannel):
         self.rect=pygame.rect.Rect(x,y,width, height) 
         self.long=long
 
-    def draw_long():
-        pass
-    def check_click():
-        pass
-    def check_col():
-        pass
+    def draw_long(self):
+        self.draw()
+        bar_rect= pygame.rect.Rect(self.x,self.y, self)
+        pygame.draw.rect(screen,self.color, bar_rect)
 
+    def check_click(self):
+        if self.rect.coollidepoint(pygame.mouse.get_pos) and pygame.mouse.get_pressed:
+            self.rect.y=pygame.mouse.get_pos()[1]
+
+class spam_bar (pannel):
+    def __init__(self,x,y,width,height,color, long):
+        super().__init__(x,y,width,height,color)
+        self.rect=pygame.rect.Rect(x,y,width, height) 
+        self.long=long
+        self.meter=0 # requires that the obkject it defined in level start menu 
+
+    def check_click (self):
+        mouse_pos=pygame.mouse.get_pos()
+        if self.rect.collidepoint(mouse_pos) and pygame.mouse.get_just_pressed()[0]:
+            self.meter+=5
+        else: 
+            self.meter-=1
+        if self.meter > self.long - (self.long/5):
+            return True
+
+    def bar_render (self):
+        self.render()
+        bar_rect=pygame.rect.Rect(self.rect.x,self.rect.y,self.rect.width,)
+
+        color=(self.color[0]/2,self.color[1]/2,self.color[2]/2)
+        # the dark colored outline 
+        pygame.draw.rect(screen,color, self.rect,5)
+        # the iner colored rect
+        pygame.draw.rect(screen,self.color,bar_rect)
+
+
+class arrow_move (pannel):
+    def __init__(self,x,y,width,height,color, long):
+        super().__init__(x,y,width,height,color)
+        self.rect=pygame.rect.Rect(x,y,width, height) 
+          
+    def chekc_arrows(self, events):
+        if events["K_A"] or events["K_LEFT"]:
+            self.rect.x-=3
+        elif events["K_d"] or events["K_RIGHT"]:
+            self.rect.x+=3
+        elif events["K_E"] or events["K_UP"]:
+            self.rect.y-=3
+        elif events["K_S"] or events["K_DOWN"]:
+            self.rect.y+=3
+
+     
 
 
 class dragable (pannel):

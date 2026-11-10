@@ -44,7 +44,6 @@ while running:
             level="leve"
 
     elif level == 1 :
-        print(f"result: {result}")
 
         if result == "home":
             level="home"
