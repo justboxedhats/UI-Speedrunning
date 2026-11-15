@@ -192,14 +192,14 @@ class game_levels:
         elif main_button.check_click():
             win=False
             lose = False
-            st_level_time=time.gmtime()
-            ed_level_time=time.gmtime()
+            st_level_time=pygame.time.get_ticks()
+            ed_level_time=pygame.time.get_ticks()
             return  "home"
         elif levels_button.check_click():
             win=False
             lose = False
-            st_level_time=time.gmtime()
-            ed_level_time=time.gmtime()
+            st_level_time=pygame.time.get_ticks()
+            ed_level_time=pygame.time.get_ticks()
             return "level_menu"
         else:
             return"lose"
@@ -326,8 +326,8 @@ class game_levels:
                         pos_tracker=0
                         win=False         
                         win=False 
-                        st_level_time=time.gmtime()
-                        ed_level_time=time.gmtime()
+                        st_level_time=pygame.time.get_ticks()
+                        ed_level_time=pygame.time.get_ticks()
                         pause=not pause
                         return "retry"                    
                     if main_button.check_click():
@@ -368,8 +368,9 @@ class game_levels:
                         pos_tracker=0
                         win=False         
                         win=False 
-                        st_level_time=time.gmtime()
-                        ed_level_time=time.gmtime()
+                        st_level_time=pygame.time.get_ticks()
+                        ed_level_time=pygame.time.get_ticks()
+                        anti_time=0
                         pause=not pause
                         return "retry"                    
                     if main_button.check_click():
@@ -425,6 +426,7 @@ class game_levels:
             list_result=dropdown.check_click()
 
             if not pause : 
+                print(f" st_time:  {st_level_time}  anti:  {anti_time}" )
                 level_time= pygame.time.get_ticks()-(st_level_time +anti_time)
 
                 # renders text
@@ -437,7 +439,7 @@ class game_levels:
                 if list_vaule== "win":
                     win_button.render()
                     if win_button.check_click():
-                        ed_level_time=time.gmtime()
+                        ed_level_time=pygame.time.get_ticks()
                         win=True
 
                 
@@ -473,8 +475,9 @@ class game_levels:
                         pos_tracker=0
                         win=False         
                         win=False 
-                        st_level_time=time.gmtime()
-                        ed_level_time=time.gmtime()
+                        st_level_time=pygame.time.get_ticks()
+                        ed_level_time=pygame.time.get_ticks()
+                        anti_time=0
                         pause=not pause
                         return "retry"                    
                     if main_button.check_click():
@@ -515,8 +518,9 @@ class game_levels:
                         pos_tracker=0
                         win=False         
                         win=False 
-                        st_level_time=time.gmtime()
-                        ed_level_time=time.gmtime()
+                        st_level_time=pygame.time.get_ticks()
+                        ed_level_time=pygame.time.get_ticks()
+                        anti_time=0
                         pause=not pause
                         return "retry"                    
                     if main_button.check_click():
@@ -616,8 +620,9 @@ class game_levels:
                         pos_tracker=0
                         win=False         
                         win=False 
-                        st_level_time=time.gmtime()
-                        ed_level_time=time.gmtime()
+                        st_level_time=pygame.time.get_ticks()
+                        ed_level_time=pygame.time.get_ticks()
+                        anti_time=0
                         pause=not pause
                         return "retry"                    
                     if main_button.check_click():
@@ -658,8 +663,9 @@ class game_levels:
                         pos_tracker=0
                         win=False         
                         win=False 
-                        st_level_time=time.gmtime()
-                        ed_level_time=time.gmtime()
+                        st_level_time=pygame.time.get_ticks()
+                        ed_level_time=pygame.time.get_ticks()
+                        anti_time=0
                         pause=not pause
                         return "retry"                    
                     if main_button.check_click():
@@ -764,8 +770,9 @@ class game_levels:
                         pos_tracker=0
                         win=False         
                         win=False 
-                        st_level_time=time.gmtime()
-                        ed_level_time=time.gmtime()
+                        st_level_time=pygame.time.get_ticks()
+                        ed_level_time=pygame.time.get_ticks()
+                        anti_time=0
                         pause=not pause
                         return "retry"                    
                     if main_button.check_click():
@@ -806,8 +813,9 @@ class game_levels:
                         pos_tracker=0
                         win=False         
                         win=False 
-                        st_level_time=time.gmtime()
-                        ed_level_time=time.gmtime()
+                        st_level_time=pygame.time.get_ticks()
+                        ed_level_time=pygame.time.get_ticks()
+                        anti_time=0
                         pause=not pause
                         return "retry"                    
                     if main_button.check_click():
@@ -920,8 +928,9 @@ class game_levels:
                         pos_tracker=0
                         win=False         
                         win=False 
-                        st_level_time=time.gmtime()
-                        ed_level_time=time.gmtime()
+                        st_level_time=pygame.time.get_ticks()
+                        ed_level_time=pygame.time.get_ticks()
+                        anti_time=0
                         pause=not pause
                         return "retry"                    
                     if main_button.check_click():
